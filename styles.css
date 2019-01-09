@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Cone; /* Гарнитура шрифта */
+    src: url(cone/Cone.ttf); /* Путь к файлу со шрифтом */
+}
+
+body {
+	font-family: Cone;
+}   
+
+#field {
+	height: 400px;
+	width: 200px;
+	border: 3px solid black;
+	background:
+		linear-gradient(#DCDCDC 0px, #DCDCDC 1px, transparent 1px),
+		linear-gradient(90deg, #DCDCDC 0px, #DCDCDC 1px, transparent 1px);
+	background-size: 20px 20px;
+	background-position: left top;
+	background-repeat: repeat;
+	opacity: 1;
+	position: relative;
+	float: left;
+}
+
+#next {
+	height: 80px;
+	width: 120px;
+	border: 2px solid black;
+	position: relative;
+		top: 0;
+		left: 208px;
+}
+
+#score {
+	width: 120px;
+	position: absolute;
+		top: 100px;
+		left: 218px;
+	font-size: 50px;
+	line-height: 75%;
+}
+
+#over {
+	display: none;
+	font-size: 70px;
+	line-height: 75%;
+	text-align: center;
+	color: red;
+	position: absolute;
+		top: 200px;
+		left: 20px;
+	z-index: 9999;
+}
+
+.figure, .next {background-color: black;}
+.blocks {
+	background-color: blue;
+	z-index: 999;
+}
+.removeing {background-color: red;}
+
+.figure, .blocks, .removeing, .next {
+	position: absolute;
+	height: 20px;
+	width: 20px;
+}
+

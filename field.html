@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>tetris</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src='generateFigure.js'></script>
+  <script src='figureSquare.js'></script>
+  <script src='figureStick.js'></script>
+  <script src='figureAngle.js'></script>
+  <script src='figureAngle2.js'></script>
+  <script src='figureSnake.js'></script>
+  <script src='figureSnake2.js'></script>
+  <script src='figureTrangle.js'></script>
+  <script src='goDown.js'></script>
+  <script src='shoudStop.js'></script>
+  <script src='turningFigure.js'></script>
+  <script src='turningTrangle.js'></script>
+  <script src='turningAngle.js'></script>
+  <script src='turningAngle2.js'></script>
+  <script src='turningSnake.js'></script>
+  <script src='turningStick.js'></script>
+  <script src='newFigure.js'></script>
+  <script src='maxLeft.js'></script>
+  <script src='maxRight.js'></script>
+  <script src='testRows.js'></script>
+  <script src='removeRow.js'></script>
+  <script src='goDownBlocks.js'></script>
+  <script src='colorRow.js'></script>
+  <script src='canMoveLeft.js'></script>
+  <script src='canMoveRight.js'></script>
+  <script src='isOver.js'></script>
+  <script src='generateNextFigure.js'></script>
+  <script src='toggleClass.js'></script>
+</head>
+<body>
+	<div id='field'>
+		<div id='over'>GAME OVER</div>
+	</div>
+	<div id='next'></div>
+	<div id='score'>SCORE<br>
+	<span>0</span></div>
+<script>
+	let field = $('#field')[0];
+	let next = $('#next')[0];
+	let fieldRect = field.getBoundingClientRect();
+	
+	let phase = 1;
+	let nowFigure;
+	let nextFigure;
+	
+	generateNextFigure();
+	newFigure();
+	generateNextFigure();
+	
+	let interval = setInterval(goDown, 1000);
+	
+	function actionKeys(event) {
+			let figure = $('.figure');
+			let mLeft = maxLeft();
+			let mRight = maxRight();
+			switch (event.key) {
+				case("ArrowLeft"):
+					if (((fieldRect.left+10) >= mLeft) || (canMoveLeft() == false)) break;
+					for(let i=0; i<figure.length; i++) {
+						figure[i].style.left = parseInt(figure[i].style.left) - 20 + 'px';
+					}
+					break;
+				case("ArrowRight"):
+					if (((fieldRect.right-10) <= mRight) || (canMoveRight() == false)) break;
+					for(let i=0; i<figure.length; i++) {
+						figure[i].style.left = parseInt(figure[i].style.left) + 20 + 'px';
+					}
+					break;
+				case("ArrowUp"):
+					turningFigure();
+					break;
+				case("ArrowDown"): 
+					goDown();
+					break;
+				default: break;
+			}
+		}
+	
+	document.addEventListener('keydown', actionKeys);
+	
+	/*field.onclick = function(event) {
+		console.log(event.clientX + ' ' + event.clientY);
+		console.log(document.elementFromPoint(event.clientX, event.clientY).style.left + ' ' + document.elementFromPoint(event.clientX, event.clientY).style.top);
+	}*/
+	
+</script>	
+</body>
+
+</html>
